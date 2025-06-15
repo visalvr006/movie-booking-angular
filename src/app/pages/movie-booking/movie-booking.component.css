@@ -1,0 +1,95 @@
+.booking-stepper-container {
+  background: #23242a;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+.booking-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.custom-stepper .p-stepper {
+  background: transparent;
+  border: none;
+}
+
+.custom-stepper .p-stepper .p-stepper-step {
+  background: #18191c;
+  color: #fff;
+  border-radius: 50%;
+  border: 2px solid #f0060b;
+}
+
+.custom-stepper .p-stepper .p-stepper-step.p-highlight {
+  background: #f0060b;
+  color: #fff;
+}
+
+.booking-content {
+  display: flex;
+  gap: 2rem;
+}
+
+.poster img {
+  width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.booking-details {
+  flex: 1;
+  color: #fff;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.date-row, .showtime-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.date-row button, .showtime-row button {
+  background: #18191c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.date-row button.active, .showtime-row button.active {
+  background: #f0060b;
+  color: #fff;
+}
+
+.date-day {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.date-num {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.date-month {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.theater-row {
+  margin-bottom: 1.5rem;
+}

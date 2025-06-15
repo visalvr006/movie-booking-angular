@@ -1,0 +1,39 @@
+<div class="booking-summary-container">
+  <div class="booking-content">
+    <div class="summary-details">
+      <div class="summary-box">
+        <div class="summary-left">
+          <div class="summary-label">Movie:</div>
+          <div class="summary-value">{{ movie?.title }} ({{ movie?.badges?.[1] || '' }})</div>
+          <div class="summary-label">Date & Time:</div>
+          <div class="summary-value">{{ date }} &bull; {{ time }}</div>
+          <div class="summary-label">Theater:</div>
+          <div class="summary-value">{{ theater }}</div>
+          <div class="summary-label">Seats:</div>
+          <div class="summary-value">{{ seatLabels }}</div>
+        </div>
+        <div class="summary-right">
+          <div class="summary-row">
+            <span>Regular Seats ({{ regularSeats }})</span>
+            <span>${{ (regularSeats * regularPrice).toFixed(2) }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Premium Seats ({{ premiumSeats }})</span>
+            <span>${{ (premiumSeats * premiumPrice).toFixed(2) }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Booking Fee</span>
+            <span>${{ bookingFee.toFixed(2) }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>${{ total.toFixed(2) }}</span>
+          </div>
+        </div>
+      </div>
+      <button class="proceed-btn" (click)="proceed.emit()">
+        Proceed to Payment <i class="pi pi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div> 

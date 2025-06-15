@@ -1,0 +1,25 @@
+
+          <div class="booking-content">
+            <div class="booking-details">
+              <div class="section-title">Select Date & Time</div>
+              <div class="date-row">
+                <button *ngFor="let date of dates"
+                        [ngClass]="{'active': date.selected}"
+                        (click)="selectDate(date)">
+                  <div class="date-day">{{ date.day }}</div>
+                  <div class="date-num">{{ date.date }}</div>
+                  <div class="date-month">{{ date.month }}</div>
+                </button>
+              </div>
+              <div class="theater-row">
+                <p-dropdown [options]="theaters" [(ngModel)]="selectedTheater" [style]="{width: '100%'}"></p-dropdown>
+              </div>
+              <div class="showtime-row">
+                <button *ngFor="let time of showtimes"
+                        [ngClass]="{'active': time.selected}"
+                        (click)="selectShowtime(time)">
+                  {{ time.label }}
+                </button>
+              </div>
+            </div>
+          </div>

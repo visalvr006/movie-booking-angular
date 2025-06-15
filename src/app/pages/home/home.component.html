@@ -1,0 +1,172 @@
+<app-header></app-header>
+<div class="home-main">
+  <section class="hero" *ngIf="!showBooking && heroMovie">
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span *ngFor="let badge of heroMovie.badges" class="badge">{{ badge }}</span>
+      </div>
+      <h1 class="hero-title">{{ heroMovie.title }}</h1>
+      <div class="hero-meta">
+        <span class="rating"><i class="pi pi-star" style="color:#FFD700"></i> {{ heroMovie.rating }}/10</span>
+        <span>{{ heroMovie.duration }}</span>
+        <span>{{ heroMovie.genres.join(', ') }}</span>
+        <span>{{ heroMovie.age }}</span>
+      </div>
+      <p class="hero-description">{{ heroMovie.description }}</p>
+      <div class="hero-actions">
+        <button class="book-btn" (click)="onBookTickets()">
+          <i class="pi pi-ticket"></i> Book Tickets
+        </button>
+        <button class="trailer-btn"><i class="pi pi-play"></i> Watch Trailer</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img [src]="heroMovie.image" [alt]="heroMovie.title" />
+    </div>
+  </section>
+
+  <section class="now-showing" *ngIf="!showBooking && heroMovie">
+    <div class="now-showing-header">
+      <h3>Now Showing</h3>
+      <div class="filter-buttons">
+        <button *ngFor="let filter of movieFilters" 
+                [ngClass]="{'active': filter === selectedFilter}"
+                (click)="filterMovies(filter)">
+          {{ filter }}
+        </button>
+      </div>
+    </div>
+    <div class="movie-list">
+      <div class="movie-card" *ngFor="let movie of filteredMovies">
+        <img [src]="movie.image" [alt]="movie.title" />
+        <div class="movie-rating-overlay">{{ movie.rating }}</div>
+        <div class="movie-info">
+          <h4>{{ movie.title }}</h4>
+          <span>{{ movie.genres.join(', ') }} &bull; {{ movie.duration }}</span>
+        </div>
+        <button class="book-btn" (click)="onBookTickets()">Book Now</button>
+      </div>
+    </div>
+    <div class="view-all-container">
+      <button class="view-all">View All Movies <i class="pi pi-arrow-right"></i></button>
+    </div>
+  </section>
+
+
+  <div *ngIf="showBooking" class="booking-stepper-container">
+    <h3 class="booking-title">Book Tickets for {{ heroMovie.title }}</h3>
+    <p-stepper [(value)]="currentStep" class="custom-stepper">
+      <p-step-list>
+        <p-step [value]="1">1</p-step>
+        <p-step [value]="2">2</p-step>
+        <p-step [value]="3">3</p-step>
+        <p-step [value]="4">4</p-step>
+      </p-step-list>
+      <p-step-panels>
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="booking-content">
+              <div class="poster">
+                <img [src]="heroMovie.image" [alt]="heroMovie.title" />
+              </div>
+              <div class="booking-details">
+                <app-movie-booking></app-movie-booking>
+                <div class="flex pt-6 justify-end">
+                  <button class="p-button" (click)="activateCallback(3); onStepChange(3)">Next</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <p-step-panel [value]="3">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="booking-content">
+              <div class="poster">
+                <img [src]="heroMovie.image" [alt]="heroMovie.title" />
+              </div>
+              <div class="booking-details">
+                <app-seat-selection [seats]="seats" (seatChange)="onSeatsSelected($event)"></app-seat-selection>
+                <div class="flex pt-6 justify-between">
+                  <button class="p-button p-button-secondary" (click)="activateCallback(2); onStepChange(2)">Back</button>
+                  <button class="p-button" (click)="activateCallback(4); onStepChange(4)">Next</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <p-step-panel [value]="4">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="booking-content">
+              <div class="poster">
+                <img [src]="heroMovie.image" [alt]="heroMovie.title" />
+              </div>
+              <div class="booking-details">
+                <app-booking-summary
+                  [movie]="heroMovie"
+                  [date]="selectedDate"
+                  [time]="selectedTime"
+                  [theater]="selectedTheater"
+                  [selectedSeats]="selectedSeats"
+                  (proceed)="onProceedToPayment()"
+                ></app-booking-summary>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+  </div>
+
+
+  
+  <section class="special-offers">
+    <h3>Special Offers</h3>
+    <div class="offers-list">
+      <div class="offer-card" *ngFor="let offer of offers">
+        <span class="offer-badge">{{ offer.badge }}</span>
+        <img [src]="offer.image" [alt]="offer.title" />
+        <div class="offer-details">
+          <h4>{{ offer.title }}</h4>
+          <p>{{ offer.desc }}</p>
+          <div class="offer-price">
+            <span class="price">${{ offer.price }}</span>
+            <span class="old-price" *ngIf="offer.oldPrice">${{ offer.oldPrice }}</span>
+          </div>
+          <button *ngIf="offer.badge === 'SAVE 20%'" class="book-btn">Add to Order</button>
+          <button *ngIf="offer.badge === 'PREMIUM'" class="learn-more">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="customer-reviews">
+    <h3>What Our Customers Say</h3>
+    <div class="reviews-list">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="stars">★★★★★</div>
+        <p>{{ review.text }}</p>
+        <div class="reviewer">
+          <span class="name">{{ review.name }}</span>
+          <span class="role">{{ review.role }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="download-app">
+    <div class="download-content">
+      <div class="download-info">
+        <h4>Download Our App</h4>
+        <p>Get the full movie experience at your fingertips. Book tickets, select seats, order snacks, and more with our mobile app.</p>
+        <div class="download-buttons">
+          <button class="app-store"> <img src="assets/appstore.png" alt="App Store" /> App Store</button>
+          <button class="google-play"> <img src="assets/googleplay.png" alt="Google Play" /> Google Play</button>
+        </div>
+      </div>
+      <div class="download-image">
+        <img src="assets/app-promo.png" alt="App Promo" />
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

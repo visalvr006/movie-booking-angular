@@ -1,0 +1,99 @@
+.booking-summary-container {
+  background: #23242a;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1100px;
+}
+
+.booking-content {
+  display: flex;
+  gap: 2rem;
+}
+
+.poster img {
+  width: 260px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.summary-details {
+  flex: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.summary-box {
+  background: #18191c;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.summary-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.summary-label {
+  color: #bbb;
+  font-size: 1rem;
+}
+.summary-value {
+  color: #fff;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: flex-end;
+  min-width: 180px;
+}
+.summary-row {
+  color: #fff;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1.5rem;
+}
+.summary-row.total {
+  font-weight: 700;
+  color: #f0060b;
+  border-top: 1px solid #444;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+}
+
+.proceed-btn {
+  background: #f0060b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.proceed-btn:hover {
+  background: #b00408;
+} 
