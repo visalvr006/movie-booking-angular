@@ -4,15 +4,30 @@ import { Injectable } from '@angular/core';
 export class MovieService {
   getHeroMovie() {
     return {
-      title: 'Quantum Horizon',
-      rating: 8.7,
-      duration: '2h 35m',
-      genres: ['Action', 'Sci-Fi'],
-      age: 'PG-13',
+      "_id": "6851687e9fb15d2aa9f63cdf",
+      "title": "Quantum Horizon",
       description: 'When a brilliant physicist discovers a way to manipulate time, he becomes the target of shadowy organizations seeking to control his technology. Now he must race against time itself to protect the future of humanity.',
-      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80',
-      badges: ['NEW RELEASE', 'IMAX', '4DX']
-    };
+      "duration": 133,
+      "language": "English",
+      "releaseDate":  "1710374400000",
+      "movieType": "3D",
+      image: 'https://i.pinimg.com/736x/70/1f/5a/701f5a2df07a25a6784dc599a52e6a63.jpg',
+      "genre": [
+          'Action', 'Sci-Fi'
+      ],
+      "posterUrl": "https://upload.wikimedia.org/wikipedia/en/d/d5/A_Complete_Unknown_poster.jpg",
+      "trailerUrl": "https://example.com/trailer.mp4",
+      "isCurrentlyRunning": true,
+      "rating": 9.1,
+      "createdAt": {
+          "$date": {
+              "$numberLong": "1749916447428"
+          }
+      },
+      "__v": {
+          "$numberInt": "0"
+      }
+  }
   }
 
   getNowShowing() {

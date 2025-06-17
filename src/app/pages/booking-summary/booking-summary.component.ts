@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-booking-summary',
   imports: [CommonModule],
   templateUrl: './booking-summary.component.html',
-  styleUrls: ['./booking-summary.component.css']
+  //styleUrls: ['./booking-summary.component.css']
 })
 export class BookingSummaryComponent {
   @Input() movie: any;

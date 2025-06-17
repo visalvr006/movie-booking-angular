@@ -16,7 +16,7 @@ import { ApiService } from '../../services/api.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  //styleUrls: ['./home.component.css'],
   standalone: true,
   imports: [
     CommonModule,
@@ -67,10 +67,11 @@ export class HomeComponent implements OnInit {
           this.nowShowing = movies.data;
           this.filteredMovies = [...this.nowShowing];
           
+          
           // Set hero movie from API data if available
-          if (this.nowShowing.length > 0) {
-            this.heroMovie = this.nowShowing[0];
-          }
+        //  if (this.nowShowing.length > 0) {
+          //  this.heroMovie = this.nowShowing[0];
+        //  }
         } else {
           console.warn('Expected an array for movies, but received:', movies);
           this.nowShowing = [];
@@ -89,7 +90,7 @@ export class HomeComponent implements OnInit {
       console.error('Movie data is missing _id:', movie);
       return;
     }
-    this.heroMovie = movie;
+    this.heroMovie = { ...movie, image: movie.posterUrl }; // Use posterUrl as the image for booking
     this.showBooking = true;
     this.currentStep = 1;
   }
@@ -175,7 +176,7 @@ export class HomeComponent implements OnInit {
     if (filter === 'All') {
       this.filteredMovies = [...this.nowShowing];
     } else {
-      this.filteredMovies = this.nowShowing.filter(movie => movie.genres.includes(filter));
+      this.filteredMovies = this.nowShowing.filter(movie => movie.genre.includes(filter));
     }
   }
 

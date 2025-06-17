@@ -9,11 +9,14 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-movie-booking',
   imports: [StepperModule, ReactiveFormsModule, FormsModule, CommonModule, DropdownModule],
   templateUrl: './movie-booking.component.html',
-  styleUrl: './movie-booking.component.css'
+  //styleUrl: './movie-booking.component.css'
 })
 export class MovieBookingComponent implements OnInit {
   @Input() movie: any;
   @Output() closeBooking = new EventEmitter<void>();
+  @Output() dateChange = new EventEmitter<string>();
+  @Output() timeChange = new EventEmitter<string>();
+  @Output() theaterChange = new EventEmitter<string>();
 
   currentStep: number = 1;
   bookingForm: FormGroup;
@@ -21,16 +24,25 @@ export class MovieBookingComponent implements OnInit {
   paymentForm: FormGroup;
 
   dates = [
-    { day: 'Wed', date: '05', month: 'Jun', selected: false },
-    { day: 'Thu', date: '06', month: 'Jun', selected: true },
-    { day: 'Fri', date: '07', month: 'Jun', selected: false },
-    { day: 'Sat', date: '08', month: 'Jun', selected: false },
-    { day: 'Sun', date: '09', month: 'Jun', selected: false },
-    { day: 'Mon', date: '10', month: 'Jun', selected: false }
+    { day: 'Wed', date: '05', month: 'Jun', selected: false, fullDate: '2023-06-05' },
+    { day: 'Thu', date: '06', month: 'Jun', selected: true, fullDate: '2023-06-06' },
+    { day: 'Fri', date: '07', month: 'Jun', selected: false, fullDate: '2023-06-07' },
+    { day: 'Sat', date: '08', month: 'Jun', selected: false, fullDate: '2023-06-08' },
+    { day: 'Sun', date: '09', month: 'Jun', selected: false, fullDate: '2023-06-09' },
+    { day: 'Mon', date: '10', month: 'Jun', selected: false, fullDate: '2023-06-10' }
   ];
 
   theaters: { label: string; value: string; }[] = [];
-  selectedTheater: any;
+  _selectedTheater: any; // Use a private property to trigger setter
+  
+  @Input() set selectedTheater(value: any) {
+    this._selectedTheater = value;
+    this.theaterChange.emit(value);
+  }
+
+  get selectedTheater(): any {
+    return this._selectedTheater;
+  }
 
   showtimes = [
     { label: '10:30 AM', selected: false },
@@ -55,6 +67,15 @@ export class MovieBookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTheaters();
+    // Emit initial selected date and time
+    const initialDate = this.dates.find(d => d.selected);
+    if (initialDate) {
+      this.dateChange.emit(initialDate.fullDate);
+    }
+    const initialTime = this.showtimes.find(t => t.selected);
+    if (initialTime) {
+      this.timeChange.emit(initialTime.label);
+    }
   }
 
   getTheaters() {
@@ -64,7 +85,7 @@ export class MovieBookingComponent implements OnInit {
           this.theaters = response.data.map((theater: any) => ({ label: theater.name, value: theater.name }));
           
           if (this.theaters.length > 0) {
-            this.selectedTheater = this.theaters[0].value;
+            this.selectedTheater = this.theaters[0].value; // This will trigger the setter and emit
           }
         } else {
           console.warn('API returned unexpected format for theaters:', response);
@@ -85,10 +106,12 @@ export class MovieBookingComponent implements OnInit {
   selectDate(date: any) {
     this.dates.forEach(d => d.selected = false);
     date.selected = true;
+    this.dateChange.emit(date.fullDate);
   }
 
   selectShowtime(time: any) {
     this.showtimes.forEach(t => t.selected = false);
     time.selected = true;
+    this.timeChange.emit(time.label);
   }
 }

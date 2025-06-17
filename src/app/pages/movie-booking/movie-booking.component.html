@@ -1,3 +1,4 @@
+            <h5>Date</h5>
             <div class="date-row">
               <button *ngFor="let date of dates"
                       [ngClass]="{'active': date.selected}"
@@ -7,9 +8,11 @@
                 <div class="date-month">{{ date.month }}</div>
               </button>
             </div>
+            <h5>Theater</h5>
             <div class="theater-row">
               <p-dropdown [options]="theaters" [(ngModel)]="selectedTheater" [style]="{width: '100%'}" placeholder="Select a Theater" optionLabel="label" optionValue="value"></p-dropdown>
             </div>
+            <h5>Showtimes</h5>
             <div class="showtime-row">
               <button *ngFor="let time of showtimes"
                       [ngClass]="{'active': time.selected}"

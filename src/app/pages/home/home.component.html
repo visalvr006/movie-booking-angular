@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="home-main">
-  <section class="hero" *ngIf="!showBooking && heroMovie">
+  <section class="hero" *ngIf="!showBooking && heroMovie" [ngStyle]="{'background-image': 'linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0.8) 50%, rgba(26, 26, 26, 0) 100%), url(' + heroMovie.image + ')'}">
     <div class="hero-content">
       <div class="hero-badges">
         <span *ngFor="let badge of heroMovie.badges" class="badge">{{ badge }}</span>
@@ -19,9 +19,6 @@
         </button>
         <button class="trailer-btn"><i class="pi pi-play"></i> Watch Trailer</button>
       </div>
-    </div>
-    <div class="hero-image">
-      <img [src]="heroMovie.image" [alt]="heroMovie.title" />
     </div>
   </section>
 
@@ -56,6 +53,9 @@
           </div>
         </ng-template>
       </p-card>
+      <div *ngIf="filteredMovies.length === 0" class="no-movies-message">
+        <p>No movies found for the selected filter.</p>
+      </div>
     </div>
     <div class="view-all-container">
       <button class="view-all">View All Movies <i class="pi pi-arrow-right"></i></button>
@@ -63,6 +63,9 @@
   </section>
 
 
+  <div *ngIf="showBooking" class="booking-page-title-wrapper">
+    <h3 class="booking-page-title">Book Tickets for {{ heroMovie?.title }}</h3>
+  </div>
   <div *ngIf="showBooking" class="booking-wrapper">
     <div class="poster-container">
       <img [src]="heroMovie.image" [alt]="heroMovie.title" />
@@ -99,7 +102,11 @@
           <p-step-panel [value]="1">
             <ng-template #content let-activateCallback="activateCallback">
               <h3 class="booking-title">Select Date & Time</h3>
-              <app-movie-booking></app-movie-booking>
+              <app-movie-booking
+                (dateChange)="selectedDate = $event"
+                (timeChange)="selectedTime = $event"
+                (theaterChange)="selectedTheater = $event"
+              ></app-movie-booking>
               <div class="flex pt-6 justify-end">
                 <!-- The 'Next' button is removed from this panel as per design -->
               </div>
@@ -116,10 +123,10 @@
                 [time]="selectedTime"
                 [theater]="selectedTheater"
               ></app-seat-selection>
-              <div class="flex pt-6 justify-between">
+              <!-- <div class="flex pt-6 justify-between">
                 <button class="p-button p-button-secondary" (click)="activateCallback(1); onStepChange(1)">Back</button>
                 <button class="p-button" (click)="activateCallback(3); onStepChange(3)">Next</button>
-              </div>
+              </div> -->
             </ng-template>
           </p-step-panel>
           <p-step-panel [value]="3">
@@ -161,11 +168,11 @@
     <h3>Special Offers</h3>
     <div class="offers-list">
       <p-card *ngFor="let offer of offers" class="offer-card">
-        <div class="p-card-header">
-          <span class="offer-badge">{{ offer.badge }}</span>
-        </div>
         <div class="p-card-content">
-          <img [src]="offer.image" [alt]="offer.title" />
+          <div class="offer-image-wrapper">
+            <span class="offer-badge">{{ offer.badge }}</span>
+            <img [src]="offer.image" [alt]="offer.title" />
+          </div>
           <div class="offer-details">
             <h4>{{ offer.title }}</h4>
             <p>{{ offer.desc }}</p>

@@ -7,7 +7,7 @@ import { ApiService } from '../../services/api.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './seat-selection.component.html',
-  styleUrls: ['./seat-selection.component.css']
+ // styleUrls: ['./seat-selection.component.css']
 })
 export class SeatSelectionComponent implements OnInit, OnChanges {
   @Input() seats: any[][] = [];
