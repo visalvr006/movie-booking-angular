@@ -1,14 +1,30 @@
 <div class="seat-selection-container">
-  <div class="seat-selection-title">Select Seats</div>
+  <div class="screen"></div>
   <div class="seat-grid">
     <div *ngFor="let row of seats; let rowIndex = index" class="seat-row">
       <span class="row-label">{{ getRowLabel(rowIndex) }}</span>
-      <div class="row-seats">
-        <button *ngFor="let seat of row"
-                [ngClass]="getSeatClass(seat)"
-                (click)="onSeatClick(seat)"
-                [disabled]="seat.state === 'booked'">
-        </button>
+      <div class="row-seats-group">
+        <div class="seat-group">
+          <button *ngFor="let seat of row.slice(0, 5)"
+                  [ngClass]="getSeatClass(seat)"
+                  (click)="onSeatClick(seat)"
+                  [disabled]="seat.state === 'booked'">
+          </button>
+        </div>
+        <div class="seat-group">
+          <button *ngFor="let seat of row.slice(5, 10)"
+                  [ngClass]="getSeatClass(seat)"
+                  (click)="onSeatClick(seat)"
+                  [disabled]="seat.state === 'booked'">
+          </button>
+        </div>
+        <div class="seat-group">
+          <button *ngFor="let seat of row.slice(10, 14)"
+                  [ngClass]="getSeatClass(seat)"
+                  (click)="onSeatClick(seat)"
+                  [disabled]="seat.state === 'booked'">
+          </button>
+        </div>
       </div>
     </div>
   </div>

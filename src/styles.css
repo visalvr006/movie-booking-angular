@@ -1,1 +1,1369 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "primeicons/primeicons.css";
+
+:root {
+    --surface-a: #1A1A1A; /* Main background */
+    --surface-b: #2A2A2A; /* Card backgrounds, input fields */
+    --surface-c: #333333; /* Borders, separators */
+    --surface-d: #444444; /* Hover states, subtle elements */
+    --surface-e: #18191C; /* Darker backgrounds like hero section */
+    --text-color: #E0E0E0; /* Main text color */
+    --text-color-secondary: #BBBBBB; /* Secondary text color */
+    --primary-color: #E50914; /* Red accent */
+    --primary-color-text: #FFFFFF; /* Text on primary color */
+    --font-family: "Inter", sans-serif; /* Example font, replace with actual */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--surface-a);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.review-card .p-card-body {
+    padding: 0;
+    background-color: #2D2D2D !important;
+    color: inherit;
+  }
+
+  .home-main {
+    background: var(--surface-a);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+  }
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-e);
+    border-radius: 12px;
+    margin: 2rem auto;
+    padding: 2.5rem 2rem;
+    max-width: 1200px;
+    gap: 2rem;
+  }
+  .hero-content {
+    flex: 1;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .badge {
+    background: var(--surface-c);
+    color: var(--text-color);
+    border-radius: 4px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .badge:first-child { background: var(--primary-color); }
+  .badge:nth-child(2) { background: #b00408; }
+  .badge:nth-child(3) { background: #7702ff; }
+  .hero-content h1 {
+    color: var(--text-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.7rem;
+  }
+  .hero-meta {
+    color: var(--text-color-secondary);
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+  .hero-content p {
+    color: var(--text-color-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  .book-btn {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    border: none;
+    border-radius: 6px;
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .book-btn:hover {
+    background: #b00408;
+  }
+  .trailer-btn {
+    background: var(--surface-c);
+    color: var(--text-color);
+    border: 1px solid var(--surface-d);
+    border-radius: 6px;
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .trailer-btn:hover {
+    background: var(--surface-d);
+  }
+  .hero-image img {
+    width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+  .now-showing {
+    background: var(--surface-e);
+    border-radius: 12px;
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 1200px;
+  }
+  .now-showing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .now-showing h3 {
+    color: var(--text-color);
+    margin-bottom: 0;
+  }
+  .filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .filter-buttons button {
+    background: var(--surface-c);
+    color: var(--text-color-secondary);
+    border: 1px solid var(--surface-d);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .filter-buttons button.active {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    border-color: var(--primary-color);
+  }
+  .filter-buttons button:hover:not(.active) {
+    background: var(--surface-d);
+  }
+  .movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusted min-width for tighter cards */
+    gap: 15px; /* Reduced gap between cards */
+    padding: 15px; /* Reduced padding for the list */
+    justify-content: center;
+  }
+  .movie-card {
+    background: var(--surface-b) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    color: var(--text-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  .movie-card .p-card-header {
+    position: relative;
+    height: 220px; /* Reduced height for the header to make card more compact */
+    overflow: hidden;
+  }
+  .movie-card .p-card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .movie-rating-overlay {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .movie-info {
+    padding: 8px 12px; /* Slightly reduced top/bottom padding */
+    text-align: left;
+  }
+  .movie-info h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 4px;
+    color: var(--text-color);
+  }
+  .movie-info span {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+  }
+  .movie-actions {
+    padding: 0 12px 8px; /* Slightly reduced bottom padding */
+    display: flex;
+    justify-content: center;
+  }
+  .movie-card .book-btn {
+    background: var(--surface-d) !important; /* Changed to match image */
+    color: var(--primary-color-text) !important;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  .movie-card .book-btn:hover {
+    background: #444 !important; /* Slightly darker on hover */
+  }
+  .view-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .view-all {
+    background: var(--surface-c);
+    color: var(--text-color);
+    border: 1px solid var(--surface-d);
+    border-radius: 4px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .view-all:hover {
+    background: var(--surface-d);
+  }
+
+  /* PrimeNG Card Body/Content/Footer padding reset */
+  .p-card .p-card-body, 
+  .p-card .p-card-content, 
+  .p-card .p-card-footer {
+    padding: 0 !important;
+  }
+
+  .p-card {
+    box-shadow: none !important; /* Remove default PrimeNG card shadow */
+  }
+
+  .special-offers {
+    background: #18191c;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    text-align: center;
+  }
+  .special-offers h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .offers-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .offer-card {
+    background: #23242a;
+    border-radius: 10px;
+    width: 550px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+  .offer-card .p-card-body {
+    background: #23242a;
+    padding: 0;
+    height: 100%;
+  }
+  .offer-card .p-card-content {
+    padding: 0;
+    height: 100%;
+  }
+  .offer-card .p-grid {
+    height: 100%;
+  }
+  .offer-image-col {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+  }
+  .offer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+  .offer-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #f0060b;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 4px;
+    z-index: 10;
+  }
+  .offer-details-col {
+    padding: 20px;
+    color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .offer-details h4 {
+    color: #f8f8f8;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .offer-details p {
+    color: #c0c0c0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .offer-price {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .price {
+    color: #e50914;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .old-price {
+    color: #9a9a9a;
+    text-decoration: line-through;
+    font-size: 16px;
+  }
+  .book-btn, .learn-more {
+    background: #2b2b2b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .book-btn:hover, .learn-more:hover {
+    background: #3a3a3a;
+  }
+  .customer-reviews {
+    background: #1A1A1A;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .customer-reviews h3 {
+    color: #F8F8F8;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+  .reviews-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .review-card {
+    background: #2D2D2D;
+    border-radius: 10px;
+    padding: 25px;
+    width: 380px;
+    color: #E0E0E0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 15px;
+  }
+  
+  .review-card .p-card-content {
+    padding: 0;
+    background-color: #2D2D2D;
+    color: inherit;
+  }
+  .stars {
+    color: #FFD700;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .review-text {
+    color: #C0C0C0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+  .reviewer-initial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #E50914;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 15px;
+  }
+  .reviewer-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .name {
+    font-weight: 600;
+    color: #F8F8F8;
+    font-size: 16px;
+  }
+  .role {
+    color: #9A9A9A;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  @media (max-width: 900px) {
+    .hero, .now-showing {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem 1rem;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+    }
+    .movie-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .movie-card {
+      width: 100%;
+      max-width: 250px;
+    }
+    .offers-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .offer-card {
+      width: 100%;
+      max-width: 350px;
+    }
+    .reviews-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .review-card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+  @media (max-width: 768px) {
+    .reviews-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    .review-card {
+      width: 90%;
+      max-width: 380px;
+    }
+    .offer-card {
+      width: 90%;
+      max-width: 400px;
+      flex-direction: column;
+    }
+    .offer-image-col {
+      height: 200px;
+    }
+    .offer-details-col {
+      padding: 15px;
+    }
+    .offer-badge {
+      top: 10px;
+      left: 10px;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+    }
+  }
+  
+  .booking-stepper-container {
+    background: #23242a;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 900px;
+  }
+  
+  .booking-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .custom-stepper .p-stepper {
+    background: transparent;
+    border: none;
+  }
+  
+  .custom-stepper .p-stepper .p-stepper-step {
+    background: #18191c;
+    color: #fff;
+    border-radius: 50%;
+    border: 2px solid #f0060b;
+  }
+  
+  .custom-stepper .p-stepper .p-stepper-step.p-highlight {
+    background: #f0060b;
+    color: #fff;
+  }
+  
+  .booking-content {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .poster img {
+    width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+  
+  .booking-details {
+    flex: 1;
+    color: #fff;
+  }
+  
+  .download-app {
+    position: relative;
+    margin: 4rem auto;
+    padding: 60px 40px;
+    max-width: 1200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  }
+  .download-app::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+  .download-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    color: #F8F8F8;
+  }
+  .download-info {
+    flex: 1;
+    text-align: left;
+  }
+  .download-info h4 {
+    color: #F8F8F8;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .download-info p {
+    color: #C0C0C0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .download-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  .app-store, .google-play {
+    background: #2D2D2D;
+    color: #F8F8F8;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .app-store img, .google-play img {
+    width: 28px;
+    height: 28px;
+  }
+  .app-store:hover, .google-play:hover {
+    background: #3A3A3A;
+    border-color: #666666;
+  }
+  .download-image img {
+    width: 380px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  .newsletter {
+    background: #18191c;
+    border-radius: 12px;
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 1200px;
+    text-align: center;
+  }
+  .newsletter h4 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+  }
+  .newsletter p {
+    color: #bbb;
+    margin-bottom: 1.2rem;
+  }
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .newsletter-form input[type="email"] {
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #23242a;
+    color: #fff;
+    font-size: 1rem;
+    width: 320px;
+  }
+  .subscribe-btn {
+    background: #f0060b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .subscribe-btn:hover {
+    background: #b00408;
+  }
+  
+  footer, .footer {
+    background: #1A1A1A;
+    color: #E0E0E0;
+    padding: 40px 0 20px 0;
+    font-size: 15px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 50px 30px 50px;
+    border-bottom: 1px solid #2D2D2D;
+  }
+  .footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #E50914;
+  }
+  .footer-newsletter h4 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #F8F8F8;
+  }
+  .footer-newsletter p {
+    margin: 0 0 15px 0;
+    color: #C0C0C0;
+    font-size: 14px;
+  }
+  .footer-newsletter form {
+    display: flex;
+  }
+  .footer-newsletter input {
+    padding: 10px 15px;
+    border: 1px solid #444444;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    background: #2D2D2D;
+    color: #E0E0E0;
+    font-size: 14px;
+  }
+  .footer-newsletter input::placeholder {
+    color: #888888;
+  }
+  .footer-newsletter button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background: #E50914;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .footer-newsletter button:hover {
+    background: #B20710;
+  }
+  .footer-social a {
+    color: #C0C0C0;
+    margin-right: 18px;
+    font-size: 22px;
+    transition: color 0.3s ease;
+  }
+  .footer-social a:hover {
+    color: #F8F8F8;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 50px;
+    border-bottom: 1px solid #2D2D2D;
+  }
+  .footer-links h5 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #F8F8F8;
+  }
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 8px;
+    color: #C0C0C0;
+  }
+  .footer-links a {
+    color: #C0C0C0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  .footer-links a:hover {
+    color: #F8F8F8;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px 0 50px;
+    font-size: 13px;
+    color: #9A9A9A;
+  }
+  .footer-payments i {
+    font-size: 24px;
+    margin-left: 10px;
+    color: #C0C0C0;
+  }
+  
+  @media (max-width: 900px) {
+    .hero, .now-showing {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem 1rem;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+    }
+    .movie-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .movie-card {
+      width: 100%;
+      max-width: 250px;
+    }
+    .offers-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .offer-card {
+      width: 100%;
+      max-width: 350px;
+    }
+    .reviews-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .review-card {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .download-app {
+      padding: 40px 20px;
+      margin: 2rem auto;
+    }
+    .download-content {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+    .download-info {
+      text-align: center;
+    }
+    .download-buttons {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .download-image img {
+      width: 90%;
+      max-width: 380px;
+    }
+    .footer-top, .footer-links, .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .footer-links {
+      gap: 30px;
+    }
+    .footer-top {
+      gap: 20px;
+    }
+    .footer-social {
+      margin-top: 15px;
+    }
+    .footer-bottom {
+      align-items: center;
+    }
+    .footer-payments {
+      margin-top: 15px;
+    }
+  } 
+
+
+  .special-offers {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .special-offers h3 {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  
+  .offers-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .offer-card {
+    background-color: #2a2a2a !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    width: 100%;
+    max-width: 580px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .offer-card .p-card-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+  }
+  
+  .offer-badge {
+    background-color: #e50914;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-bottom-right-radius: 8px;
+    z-index: 10;
+    position: relative;
+  }
+  
+  .offer-card .p-card-content {
+    display: flex;
+    padding: 0 !important;
+    width: 100%;
+  }
+  
+  .offer-card img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+  }
+  
+  .offer-details {
+    padding: 0 30px 30px 30px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .offer-details h4 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .offer-details p {
+    font-size: 1rem;
+    color: #bbb;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .offer-price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+  
+  .offer-price .price {
+    font-size: 1.8rem;
+    color: #e50914;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  
+  .offer-price .old-price {
+    font-size: 1.1rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  .offer-card .p-card-footer {
+    padding: 0 30px 30px 30px !important;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .offer-card .book-btn, .offer-card .learn-more {
+    background-color: #333 !important;
+    color: #fff !important;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .offer-card .book-btn:hover, .offer-card .learn-more:hover {
+    background-color: #444 !important;
+  }
+  
+  .offer-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+
+  .special-offers {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .special-offers h3 {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  
+  .offers-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .offer-card {
+    background-color: #2a2a2a !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    width: 100%;
+    max-width: 580px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .offer-card .p-card-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+  }
+  
+  .offer-badge {
+    background-color: #e50914;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-bottom-right-radius: 8px;
+    z-index: 10;
+    position: relative;
+  }
+  
+  .offer-card .p-card-content {
+    display: flex;
+    padding: 0 !important;
+    width: 100%;
+  }
+  
+  .offer-card img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+  }
+  
+  .offer-details {
+    padding: 0 30px 30px 30px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .offer-details h4 {
+    font-size: 1.6rem; /* Reduced font size */
+    margin-top: 0;
+    margin-bottom: 8px; /* Reduced margin */
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .offer-details p {
+    font-size: 0.9rem; /* Reduced font size */
+    color: #bbb;
+    line-height: 1.4;
+    margin-bottom: 15px; /* Reduced margin */
+  }
+  
+  .offer-price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+  
+  .offer-price .price {
+    font-size: 1.8rem;
+    color: #e50914;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  
+  .offer-price .old-price {
+    font-size: 1.1rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  .offer-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+  .offer-card .book-btn, .offer-card .learn-more {
+    background-color: #333 !important;
+    color: #fff !important;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .offer-card .book-btn:hover, .offer-card .learn-more:hover {
+    background-color: #444 !important;
+  }
+  
+  .booking-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* Reduced max-width for overall content */
+    margin: 0 auto;
+    padding: 15px; /* Reduced padding */
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .poster-container {
+    flex: 0 0 350px; /* Fixed width for the poster container */
+    /* flex: 1; */
+    height: auto; /* Adjust height automatically */
+    overflow: hidden; /* Ensures image does not overflow */
+    border-radius: 8px;
+  }
+  
+  .poster-container img {
+    width: 100%;
+    height: 100%; /* Make image take full height of its container */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    display: block; /* Removes extra space below image */
+  }
+  
+  .stepper-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #2a2a2a;
+    padding: 15px; /* Reduced padding */
+    border-radius: 8px;
+  }
+  
+  .booking-title {
+    font-size: 20px; /* Reduced font size */
+    color: #e0e0e0;
+    margin-bottom: 15px; /* Reduced margin */
+    font-weight: 600;
+  }
+  
+  .custom-stepper .p-stepper-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .custom-stepper .p-stepper-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0px; /* Ensure no extra margin for the action */
+  }
+  
+  .custom-stepper .p-stepper-number {
+    width: 30px; /* Reduced size */
+    height: 30px; /* Reduced size */
+    font-size: 14px; /* Reduced font size */
+    margin-bottom: 5px; /* Reduced margin */
+  }
+  
+  .custom-stepper .p-stepper-action.p-highlight .p-stepper-number,
+  .custom-stepper .p-stepper-action.p-focus .p-stepper-number {
+    background-color: #e50914; /* Red for active step */
+    color: #fff;
+  }
+  
+  .custom-stepper .p-stepper-title {
+    font-size: 12px; /* Reduced font size */
+    color: #bbb;
+  }
+  
+  .custom-stepper .p-stepper-separator {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #e50914; /* Changed to red for consistency with active state */
+    margin: 0 10px;
+    position: relative;
+    top: 18px;
+  }
+  
+  .custom-stepper .p-stepper-panels {
+    padding: 10px 0; /* Reduced padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom-stepper .p-stepper-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .now-showing .movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusted min-width for tighter cards */
+    gap: 15px; /* Reduced gap between cards */
+    padding: 15px; /* Reduced padding for the list */
+    justify-content: center;
+  }
+  
+  .now-showing .movie-card {
+    background-color: #2a2a2a !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  
+  .now-showing .movie-card .p-card-header {
+    position: relative;
+    height: 220px; /* Reduced height for the header to make card more compact */
+    overflow: hidden;
+  }
+  
+  .now-showing .movie-card .p-card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .now-showing .movie-rating-overlay {
+    top: 8px;
+    right: 8px;
+    padding: 3px 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  
+  .now-showing .movie-info {
+    padding: 8px 12px; /* Slightly reduced top/bottom padding */
+    text-align: left;
+  }
+  
+  .now-showing .movie-info h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 4px;
+    color: #e0e0e0;
+  }
+  
+  .now-showing .movie-info span {
+    font-size: 12px;
+    color: #bbb;
+  }
+  
+  .now-showing .movie-actions {
+    padding: 0 12px 8px; /* Slightly reduced bottom padding */
+  }
+  
+  .now-showing .book-btn {
+    padding: 8px 15px; /* Reduced padding */
+    font-size: 13px; /* Reduced font size */
+  }
+  
+  .now-showing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+  }
+  
+  .now-showing-header h3 {
+    font-size: 24px;
+    color: #e0e0e0;
+    margin: 0;
+  }
+  
+  .now-showing .filter-buttons button {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  .now-showing .filter-buttons button.active,
+  .now-showing .filter-buttons button:hover {
+    background-color: #e50914;
+    border-color: #e50914;
+    color: #fff;
+  }
+  
+  .now-showing .movie-card .p-card-body {
+    padding: 0 !important;
+  }
+  
+  .now-showing .movie-card .p-card-content {
+    padding: 0 !important;
+  }
+  
+  .now-showing .movie-card .p-card-footer {
+    padding: 0 !important;
+  }
+  
+  

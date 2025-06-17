@@ -1,9 +1,88 @@
+.booking-summary {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-summary h2 {
+  margin: 0 0 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.summary-details {
+  margin-bottom: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.price-breakdown {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.price-row.total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px solid #ddd;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #dc3545;
+  background: #f8d7da;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.proceed-button {
+  width: 100%;
+  padding: 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.proceed-button:hover {
+  background: #c82333;
+}
+
+.proceed-button:disabled {
+  background: #dc354580;
+  cursor: not-allowed;
+}
+
 .booking-summary-container {
-  background: #23242a;
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 1100px;
+  /* background: #23242a; */
+  /* border-radius: 16px; */
+  padding: 15px; /* Consistent padding with other stepper steps */
+  /* margin: 2rem auto; */
+  /* max-width: 1100px; */
 }
 
 .booking-content {
@@ -17,83 +96,80 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 
-.summary-details {
-  flex: 1;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
 .summary-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 1.2rem;
+  font-size: 18px; /* Adjusted font size */
+  font-weight: 600;
+  margin-bottom: 15px; /* Adjusted margin */
+  color: #e0e0e0;
 }
 
 .summary-box {
-  background: #18191c;
-  border-radius: 12px;
-  padding: 2rem 2.5rem;
+  background: #2a2a2a; /* Darker background for the box itself */
+  border-radius: 8px; /* Slightly less rounded corners */
+  padding: 20px 25px; /* Increased padding to match the image */
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 25px; /* Adjusted margin to match the image spacing */
+  flex-wrap: wrap; /* Allow wrapping if content is too wide */
 }
 
 .summary-left {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px; /* Increased gap between items */
+  flex: 1;
+  min-width: 200px; /* Ensure it doesn't collapse too much */
 }
 .summary-label {
-  color: #bbb;
-  font-size: 1rem;
+  color: var(--text-color-secondary); /* Lighter gray for labels */
+  font-size: 14px; /* Adjusted font size */
 }
 .summary-value {
-  color: #fff;
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
+  color: var(--text-color); /* White for values */
+  font-size: 15px; /* Adjusted font size, slightly larger */
+  margin-bottom: 0px; /* Remove margin, gap handles spacing */
 }
 
 .summary-right {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 8px; /* Increased gap between items */
   align-items: flex-end;
-  min-width: 180px;
+  min-width: 150px; /* Ensure it doesn't collapse too much */
 }
 .summary-row {
-  color: #fff;
-  font-size: 1.05rem;
+  color: var(--text-color); /* White for values */
+  font-size: 15px; /* Adjusted font size */
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 1.5rem;
+  gap: 15px; /* Increased gap for better spacing */
 }
 .summary-row.total {
   font-weight: 700;
-  color: #f0060b;
-  border-top: 1px solid #444;
-  margin-top: 0.7rem;
-  padding-top: 0.7rem;
+  color: var(--primary-color); /* Red color for total */
+  border-top: 1px solid var(--surface-d); /* Lighter line color */
+  margin-top: 15px; /* Adjusted margin */
+  padding-top: 15px; /* Adjusted padding */
 }
 
 .proceed-btn {
-  background: #f0060b;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--primary-color-text);
   border: none;
   border-radius: 8px;
-  padding: 0.9rem 2.5rem;
-  font-size: 1.1rem;
+  padding: 12px 20px; /* Increased padding for larger button */
+  font-size: 16px; /* Increased font size */
   font-weight: 700;
   cursor: pointer;
-  margin-top: 1.2rem;
+  margin-top: 15px;
   transition: background 0.2s;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  align-self: flex-end; /* Align button to the right */
+  gap: 8px; /* Increased gap for icon */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 .proceed-btn:hover {
-  background: #b00408;
+  background: var(--primary-700); /* Darker red on hover */
 } 

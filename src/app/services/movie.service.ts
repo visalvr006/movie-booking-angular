@@ -26,7 +26,7 @@ export class MovieService {
 
   getOffers() {
     return [
-      { title: 'Movie Night Combo', desc: 'Get a large popcorn, two medium drinks, and a candy of your choice at a special discounted price.', price: 15.99, oldPrice: 19.90, image: 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=200&q=80', badge: 'SAVE 20%' },
+      { title: 'Movie Night Combo', desc: 'Get a large popcorn, two medium drinks, and a candy of your choice at a special discounted price.', price: 15.99, oldPrice: 19.90, image: 'https://th.bing.com/th/id/OIP.4m2o5qrlAHxGM_kVIuOrMAHaHa?r=0&pid=ImgDet&w=202&h=202&c=7&cb=idpwebpc1', badge: 'SAVE 20%' },
       { title: 'Premium Membership', desc: 'Join our premium membership program and enjoy exclusive benefits, discounts, and early access to blockbuster premieres.', price: 9.99, image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', badge: 'PREMIUM' }
     ];
   }

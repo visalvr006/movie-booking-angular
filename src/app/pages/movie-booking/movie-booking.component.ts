@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { DropdownModule } from 'primeng/dropdown';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-movie-booking',
@@ -10,7 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
   templateUrl: './movie-booking.component.html',
   styleUrl: './movie-booking.component.css'
 })
-export class MovieBookingComponent {
+export class MovieBookingComponent implements OnInit {
   @Input() movie: any;
   @Output() closeBooking = new EventEmitter<void>();
 
@@ -28,10 +29,8 @@ export class MovieBookingComponent {
     { day: 'Mon', date: '10', month: 'Jun', selected: false }
   ];
 
-  theaters = [
-    { label: 'CineFlex IMAX - Downtown', value: 'CineFlex IMAX - Downtown' }
-  ];
-  selectedTheater = this.theaters[0].value;
+  theaters: { label: string; value: string; }[] = [];
+  selectedTheater: any;
 
   showtimes = [
     { label: '10:30 AM', selected: false },
@@ -41,7 +40,7 @@ export class MovieBookingComponent {
     { label: '9:30 PM', selected: false }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.bookingForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
@@ -52,6 +51,31 @@ export class MovieBookingComponent {
     this.paymentForm = this.fb.group({
       card: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.getTheaters();
+  }
+
+  getTheaters() {
+    this.apiService.getTheaters().subscribe(
+      (response: any) => {
+        if (response && Array.isArray(response.data)) {
+          this.theaters = response.data.map((theater: any) => ({ label: theater.name, value: theater.name }));
+          
+          if (this.theaters.length > 0) {
+            this.selectedTheater = this.theaters[0].value;
+          }
+        } else {
+          console.warn('API returned unexpected format for theaters:', response);
+          this.theaters = [];
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching theaters:', error);
+        this.theaters = [];
+      }
+    );
   }
 
   onClose() {

@@ -1,565 +1,206 @@
-.home-main {
-  background: #141416;
-  min-height: 100vh;
-  padding-bottom: 2rem;
+.booking-stepper .p-stepper {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    overflow: hidden;
 }
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #18191c;
-  border-radius: 12px;
-  margin: 2rem auto;
-  padding: 2.5rem 2rem;
-  max-width: 1200px;
-  gap: 2rem;
-}
-.hero-content {
-  flex: 1;
-}
-.hero-badges {
-  display: flex;
-  gap: 0.7rem;
-  margin-bottom: 1rem;
-}
-.badge {
-  background: #23242a;
-  color: #fff;
-  border-radius: 4px;
-  padding: 0.2rem 0.7rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-.badge:first-child { background: #f0060b; }
-.badge:nth-child(2) { background: #b00408; }
-.badge:nth-child(3) { background: #7702ff; }
-.hero-content h1 {
-  color: #fff;
-  font-size: 2.5rem;
-  margin-bottom: 0.7rem;
-}
-.hero-meta {
-  color: #bbb;
-  display: flex;
-  gap: 1.2rem;
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-}
-.hero-content p {
-  color: #bbb;
-  margin-bottom: 1.5rem;
-}
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-}
-.book-btn {
-  background: #f0060b;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.7rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.book-btn:hover {
-  background: #b00408;
-}
-.trailer-btn {
-  background: #23242a;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 6px;
-  padding: 0.7rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.trailer-btn:hover {
-  background: #444;
-}
-.hero-image img {
-  width: 320px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-}
-.now-showing {
-  background: #18191c;
-  border-radius: 12px;
-  margin: 2rem auto;
-  padding: 2rem;
-  max-width: 1200px;
-}
-.now-showing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-.now-showing h3 {
-  color: #fff;
-  margin-bottom: 0;
-}
-.filter-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-.filter-buttons button {
-  background: #23242a;
-  color: #bbb;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.filter-buttons button.active {
-  background: #f0060b;
-  color: #fff;
-  border-color: #f0060b;
-}
-.filter-buttons button:hover:not(.active) {
-  background: #333;
-}
-.movie-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-.movie-card {
-  background: #23242a;
-  border-radius: 10px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  position: relative;
-}
-.movie-card img {
-  width: 100%;
-  height: 170px;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-.movie-rating-overlay {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: #f0060b;
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-}
-.movie-info h4 {
-  color: #fff;
-  margin: 0.5rem 0 0.2rem 0;
-}
-.movie-info span {
-  color: #bbb;
-  font-size: 0.98rem;
-}
-.movie-card button {
-  background: #2b2b2b;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.2s;
-}
-.movie-card button:hover {
-  background: #444;
-}
-.view-all-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-.view-all {
-  background: #23242a;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 4px;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.view-all:hover {
-  background: #444;
-}
-.special-offers {
-  background: #18191c;
-  padding: 2rem;
-  border-radius: 12px;
-  margin: 2rem 0;
-}
-.special-offers h3 {
-  color: #fff;
-  margin-bottom: 1.5rem;
-}
-.offers-list {
-  display: flex;
-  gap: 2rem;
-}
-.offer-card {
-  background: #23242a;
-  border-radius: 10px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 320px;
-  position: relative;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-}
-.offer-badge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: #f0060b;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: bold;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-}
-.offer-card img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 1rem;
-}
-.offer-details h4 {
-  color: #fff;
-  margin: 0.5rem 0;
-}
-.offer-details p {
-  color: #bbb;
-  font-size: 0.98rem;
-  margin-bottom: 1rem;
-}
-.offer-price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.price {
-  color: #f0060b;
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-.old-price {
-  color: #888;
-  text-decoration: line-through;
-  font-size: 1rem;
-}
-button {
-  background: #f0060b;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-button.learn-more {
-  background: #23242a;
-  color: #f0060b;
-  border: 1px solid #f0060b;
-}
-button:hover, button.learn-more:hover {
-  background: #b00408;
-  color: #fff;
-}
-.customer-reviews {
-  background: #18191c;
-  padding: 2rem;
-  border-radius: 12px;
-  margin: 2rem 0;
-}
-.customer-reviews h3 {
-  color: #fff;
-  margin-bottom: 1.5rem;
-}
-.reviews-list {
-  display: flex;
-  gap: 2rem;
-}
-.review-card {
-  background: #23242a;
-  border-radius: 10px;
-  padding: 1.5rem;
-  width: 320px;
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.stars {
-  color: #f0060b;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-.review-card p {
-  color: #bbb;
-  font-size: 1rem;
-  margin: 0 0 0.5rem 0;
-}
-.reviewer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-.name {
-  font-weight: bold;
-  color: #fff;
-}
-.role {
-  color: #f0060b;
-  font-size: 0.95rem;
-}
-@media (max-width: 900px) {
-  .hero, .now-showing {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: flex-start;
-    padding: 1.5rem 1rem;
-  }
-  .hero-image img {
-    width: 100%;
-    max-width: 320px;
-  }
-  .movie-list {
-    flex-direction: column;
-    gap: 1.5rem;
+
+.booking-stepper .p-stepper-list {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-  }
-  .movie-card {
     width: 100%;
-    max-width: 250px;
-  }
-  .offers-list {
-    flex-direction: column;
-    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 0;
+}
+
+.booking-stepper .p-step {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    flex: 1;
+    display: flex;
     align-items: center;
-  }
-  .offer-card {
-    width: 100%;
-    max-width: 350px;
-  }
-  .reviews-list {
-    flex-direction: column;
-    gap: 1.5rem;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Prevent content from spilling out */
+}
+
+.booking-stepper .p-step:last-child .p-stepper-separator {
+    display: none !important; /* Hide separator for the last step */
+}
+
+.booking-stepper .p-stepper-header {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: unset !important;
+    display: flex; /* Ensure flex behavior for internal layout */
     align-items: center;
-  }
-  .review-card {
+    justify-content: center;
+    width: 100%; /* Take full width for proper separator alignment */
+    position: relative; /* Essential for absolute positioning of separator */
+}
+
+.booking-stepper .p-stepper-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    min-height: unset !important;
+    width: 100%; /* Take full width to align number and separator */
+    position: relative;
+}
+
+/* Hide any element that might be a default label or hidden content */
+.booking-stepper .p-steps-item-label,
+.booking-stepper .p-steps-item-link,
+.booking-stepper .p-stepper-title {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+}
+
+/* Aggressively hide any potential default markers or pseudo-elements not covered */
+.booking-stepper .p-step::before,
+.booking-stepper .p-step::after,
+.booking-stepper .p-stepper-header::before,
+.booking-stepper .p-stepper-header::after,
+.booking-stepper .p-stepper-action::before,
+.booking-stepper .p-stepper-action::after,
+.booking-stepper .p-stepper-number::before,
+.booking-stepper .p-stepper-number::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Hide any content *directly* inside p-stepper-action that isn't the number or separator */
+.booking-stepper .p-stepper-action > *:not(.p-stepper-number):not(.p-stepper-separator) {
+    display: none !important;
+}
+
+.booking-stepper .p-stepper-number {
+    background-color: var(--surface-d) !important; /* Inactive circle background */
+    color: var(--text-color-secondary) !important; /* Inactive circle number color, changed from text-color to text-color-secondary for lighter gray */
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    font-weight: 600 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem !important;
+    margin: 0; /* Remove any default margin */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s !important; /* Smooth transition */
+    border: 2px solid var(--surface-c) !important; /* Inactive circle border */
+    z-index: 1; /* Ensure number is above separator */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.booking-stepper .p-stepper-separator {
+    background-color: var(--surface-c) !important; /* Inactive line color (gray), changed from primary-color */
+    height: 4px !important;
+    flex: 1; /* Allow it to take available space */
+    margin: 0 16px; /* Adjusted margin to ensure proper spacing around the circle and line */
+    transition: background-color 0.3s !important;
+    position: absolute;
+    left: 0; /* Start from the left edge of the p-stepper-header */
+    right: 0; /* Extend to the right edge of the p-stepper-header */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0; /* Ensure separator is behind number */
+}
+
+/* Active step styling */
+.booking-stepper .p-stepper-header.p-highlight .p-stepper-number {
+    background-color: var(--primary-color) !important; /* Active circle background (red) */
+    color: var(--surface-a) !important; /* Active circle number color (white) */
+    border-color: var(--primary-color) !important; /* Active circle border (red) */
+}
+
+.booking-stepper .p-stepper-header.p-highlight .p-stepper-separator {
+    background-color: var(--primary-color) !important; /* Active line color (red) */
+}
+
+/* Adjust separator for steps before the active one */
+.booking-stepper .p-stepper-header.p-completed .p-stepper-separator {
+    background-color: var(--primary-color) !important; /* Red for completed separators */
+}
+
+.booking-stepper .p-stepper-header.p-completed .p-stepper-number {
+    background-color: var(--primary-color) !important; /* Completed circle background (red) */
+    color: var(--surface-a) !important; /* Completed circle number color (white) */
+    border-color: var(--primary-color) !important; /* Completed circle border (red) */
+}
+
+/* Remove extra padding around the stepper content */
+.booking-stepper .p-stepper-content {
+    padding: 0 !important;
+}
+
+.booking-stepper .p-stepper-panel {
+    padding: 0 !important;
+}
+
+/* Hide the step titles as they are not in the design */
+.booking-stepper .p-stepper-title {
+    display: none !important;
+}
+
+.booking-stepper {
+    max-width: none; /* Remove max-width from stepper itself as it's now controlled by wrapper */
+    margin: 0; /* Remove margin from stepper */
+    background-color: transparent; /* Ensure stepper background is transparent */
+    padding: 0; /* Remove padding from stepper */
+    border-radius: 0; /* Remove border-radius from stepper */
+}
+
+.booking-stepper ul,
+.booking-stepper li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.booking-stepper .p-stepper-header::before,
+.booking-stepper .p-stepper-header::after,
+.booking-stepper .p-stepper-number::before,
+.booking-stepper .p-stepper-number::after {
+    content: none !important;
+}
+
+.booking-wrapper {
+    display: flex;
+    gap: 2rem; /* Spacing between poster and stepper */
+    background-color: var(--surface-a); /* Background color matching the image */
+    border-radius: 12px; /* Rounded corners */
+    padding: 1.5rem; /* Padding around the content */
+    max-width: 1100px; /* Increased max-width for the full container to better match image */
+    margin: 2rem auto; /* Center the booking wrapper */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.poster-container {
+    flex-shrink: 0; /* Prevent poster from shrinking */
+    width: 140px; /* Reduced width for the poster container */
+    border-radius: 6px; /* Adjusted border-radius for the container */
+    overflow: hidden; /* Ensure content inside respects border-radius */
+}
+
+.poster-container img {
     width: 100%;
-    max-width: 350px;
-  }
+    height: 100%; /* Make image fill the height of its parent container */
+    object-fit: cover; /* Ensure image covers the area without distortion */
+    border-radius: 6px; /* Ensure image also has rounded corners */
+    box-shadow: none; /* Remove shadow from img, let the wrapper handle it */
 }
 
-.booking-stepper-container {
-  background: #23242a;
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 900px;
+.stepper-content-container {
+    flex-grow: 1; /* Allow stepper content to take remaining space */
+    display: flex;
+    flex-direction: column;
+    /* No specific alignment needed here, as content is naturally block-aligned */
 }
 
-.booking-title {
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-}
-
-.custom-stepper .p-stepper {
-  background: transparent;
-  border: none;
-}
-
-.custom-stepper .p-stepper .p-stepper-step {
-  background: #18191c;
-  color: #fff;
-  border-radius: 50%;
-  border: 2px solid #f0060b;
-}
-
-.custom-stepper .p-stepper .p-stepper-step.p-highlight {
-  background: #f0060b;
-  color: #fff;
-}
-
-.booking-content {
-  display: flex;
-  gap: 2rem;
-}
-
-.poster img {
-  width: 220px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-}
-
-.booking-details {
-  flex: 1;
-  color: #fff;
-}
-
-.download-app {
-  background: #18191c;
-  border-radius: 12px;
-  margin: 2rem auto;
-  padding: 2rem;
-  max-width: 1200px;
-}
-.download-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-.download-info {
-  flex: 1;
-}
-.download-info h4 {
-  color: #fff;
-  font-size: 1.3rem;
-  margin-bottom: 0.7rem;
-}
-.download-info p {
-  color: #bbb;
-  margin-bottom: 1.2rem;
-}
-.download-buttons {
-  display: flex;
-  gap: 1rem;
-}
-.app-store, .google-play {
-  background: #23242a;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.7rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  transition: background 0.2s;
-}
-.app-store img, .google-play img {
-  width: 24px;
-  height: 24px;
-}
-.app-store:hover, .google-play:hover {
-  background: #444;
-}
-.download-image img {
-  width: 320px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-}
-
-.newsletter {
-  background: #18191c;
-  border-radius: 12px;
-  margin: 2rem auto;
-  padding: 2rem;
-  max-width: 1200px;
-  text-align: center;
-}
-.newsletter h4 {
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 0.7rem;
-}
-.newsletter p {
-  color: #bbb;
-  margin-bottom: 1.2rem;
-}
-.newsletter-form {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.newsletter-form input[type="email"] {
-  padding: 0.7rem 1.2rem;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #23242a;
-  color: #fff;
-  font-size: 1rem;
-  width: 320px;
-}
-.subscribe-btn {
-  background: #f0060b;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.7rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.subscribe-btn:hover {
-  background: #b00408;
-}
-
-footer, .footer {
-  background: #18191c;
-  color: #bbb;
-  padding: 2rem 0 1rem 0;
-  margin-top: 2rem;
-  border-radius: 12px 12px 0 0;
-  text-align: center;
-}
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  margin: 2rem 0 1rem 0;
-}
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-links li {
-  margin-bottom: 0.5rem;
-}
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.footer-social a {
-  color: #fff;
-  font-size: 1.3rem;
-  transition: color 0.2s;
-}
-.footer-social a:hover {
-  color: #f0060b;
-}
-.footer-bottom {
-  color: #888;
-  font-size: 0.95rem;
-  margin-top: 1rem;
-} 
