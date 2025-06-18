@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MovieBookingComponent } from '../movie-booking/movie-booking.component';
 import { SeatSelectionComponent } from '../seat-selection/seat-selection.component';
 import { BookingSummaryComponent } from '../booking-summary/booking-summary.component';
@@ -27,6 +28,7 @@ import { ApiService } from '../../services/api.service';
     CardModule,
     InputTextModule,
     FormsModule,
+    HttpClientModule,
     MovieBookingComponent,
     SeatSelectionComponent,
     BookingSummaryComponent
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit {
   selectedTime: string = '4:00 PM';
   selectedTheater: string = 'CineFlex IMAX - Downtown';
   phoneNumber: string = '';
+  showAllMovies: boolean = false;
 
   movieFilters: string[] = ['All', 'Action', 'Comedy', 'Drama', 'Horror'];
   selectedFilter: string = 'All';
@@ -108,7 +111,10 @@ export class HomeComponent implements OnInit {
   }
 
   onBookingDetails(date: string, time: string, theater: string) {
-    this.selectedDate = date;
+    // Convert date to YYYY-MM-DD format for backend
+    const dateObj = new Date(date);
+    const formattedDate = dateObj.toISOString().split('T')[0];
+    this.selectedDate = formattedDate;
     this.selectedTime = time;
     this.selectedTheater = theater;
   }
@@ -181,20 +187,35 @@ export class HomeComponent implements OnInit {
   }
 
   initSeats() {
-    // Example: 6 rows, 14 seats per row, with some booked and premium
-    const rows = 6;
-    const cols = 14;
-    this.seats = Array.from({ length: rows }, (_, rowIdx) =>
-      Array.from({ length: cols }, (_, colIdx) => {
-        let state = 'available';
-        if (rowIdx === 1 && [4,5,6].includes(colIdx)) state = 'booked';
-        if (rowIdx === 2 && [2,3,4,5,6,7,8,9].includes(colIdx)) state = 'premium';
-        if (rowIdx === 2 && [5,6,7].includes(colIdx)) state = 'selected';
-        return {
-          id: `${String.fromCharCode(65+rowIdx)}${colIdx+1}`,
-          state
-        };
-      })
+    // Fetch booked seats from the API
+    this.apiService.getBookedSeats(this.heroMovie._id, this.selectedDate, this.selectedTime, this.selectedTheater).subscribe(
+      (data: any[]) => {
+        const rows = 6;
+        const cols = 14;
+        this.seats = Array.from({ length: rows }, (_, rowIdx) =>
+          Array.from({ length: cols }, (_, colIdx) => ({
+            id: `${String.fromCharCode(65 + rowIdx)}${colIdx + 1}`,
+            state: 'available'
+          }))
+        );
+
+        data.forEach(booking => {
+          booking.seats.forEach((bookedSeatId: string) => {
+            const rowLabel = bookedSeatId.charAt(0);
+            const colNum = parseInt(bookedSeatId.substring(1), 10);
+
+            const rowIndex = rowLabel.charCodeAt(0) - 'A'.charCodeAt(0);
+            const colIndex = colNum - 1;
+
+            if (this.seats[rowIndex] && this.seats[rowIndex][colIndex]) {
+              this.seats[rowIndex][colIndex].state = 'booked';
+            }
+          });
+        });
+      },
+      error => {
+        console.error('Error fetching booked seats:', error);
+      }
     );
   }
 } 

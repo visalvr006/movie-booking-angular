@@ -32,7 +32,12 @@ export class ApiService {
   getBookedSeats(movieId?: string, date?: string, time?: string, theater?: string): Observable<any> {
     let params = new URLSearchParams();
     if (movieId) params.append('movieId', movieId);
-    if (date) params.append('date', date);
+    if (date) {
+      // Ensure date is in YYYY-MM-DD format
+      const dateObj = new Date(date);
+      const formattedDate = dateObj.toISOString().split('T')[0];
+      params.append('date', formattedDate);
+    }
     if (time) params.append('time', time);
     if (theater) params.append('theater', theater);
 

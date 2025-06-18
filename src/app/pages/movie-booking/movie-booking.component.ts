@@ -1,13 +1,15 @@
+// This is a dummy comment to trigger re-compilation
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-movie-booking',
-  imports: [StepperModule, ReactiveFormsModule, FormsModule, CommonModule, DropdownModule],
+  imports: [StepperModule, ReactiveFormsModule, FormsModule, CommonModule, DropdownModule, ButtonModule],
   templateUrl: './movie-booking.component.html',
   //styleUrl: './movie-booking.component.css'
 })
@@ -17,6 +19,7 @@ export class MovieBookingComponent implements OnInit {
   @Output() dateChange = new EventEmitter<string>();
   @Output() timeChange = new EventEmitter<string>();
   @Output() theaterChange = new EventEmitter<string>();
+  @Output() nextStep = new EventEmitter<void>();
 
   currentStep: number = 1;
   bookingForm: FormGroup;
@@ -82,7 +85,10 @@ export class MovieBookingComponent implements OnInit {
     this.apiService.getTheaters().subscribe(
       (response: any) => {
         if (response && Array.isArray(response.data)) {
-          this.theaters = response.data.map((theater: any) => ({ label: theater.name, value: theater.name }));
+          this.theaters = response.data.map((theater: any) => ({
+            label: theater.name,
+            value: theater._id
+          }));
           
           if (this.theaters.length > 0) {
             this.selectedTheater = this.theaters[0].value; // This will trigger the setter and emit
@@ -113,5 +119,9 @@ export class MovieBookingComponent implements OnInit {
     this.showtimes.forEach(t => t.selected = false);
     time.selected = true;
     this.timeChange.emit(time.label);
+  }
+
+  onNextStep() {
+    this.nextStep.emit();
   }
 }

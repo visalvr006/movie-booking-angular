@@ -1699,7 +1699,7 @@
 /* Download App Section */
 .download-app {
   background-color: #1a1a1a;
-  padding: 60px 20px;
+  padding: 20px 20px;
   text-align: center;
 }
 
@@ -1768,13 +1768,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.download-image img {
-  max-width: 100%;
-  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  height: 260px;
 }
 
 /* Responsive adjustments for Download App */
@@ -1837,6 +1836,69 @@
     max-width: 250px; /* Limit button width on very small screens */
     margin: 0 auto; /* Center buttons */
   }
+}
+
+.outlined-red-btn, .outlined-red-btn-secondary {
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  border-radius: 6px;
+  padding: 0.6rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(229,9,20,0.08);
+  outline: none;
+  letter-spacing: 0.5px;
+}
+
+.outlined-red-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(229,9,20,0.18);
+}
+
+.outlined-red-btn-secondary {
+  border-color: #b00408;
+  color: #b00408;
+}
+
+.outlined-red-btn-secondary:hover {
+  background: #b00408;
+  color: #fff;
+  border-color: #b00408;
+}
+
+.flex.pt-6.justify-between {
+  gap: 1.5rem;
+}
+
+/* Phone Number Input Styles */
+.phone-number-container {
+  margin-bottom: 20px;
+}
+
+.phone-number-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.phone-number-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.phone-number-container input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.1);
 }
   
   
