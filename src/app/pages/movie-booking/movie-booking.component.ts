@@ -1,6 +1,6 @@
 // This is a dummy comment to trigger re-compilation
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { DropdownModule } from 'primeng/dropdown';
@@ -13,8 +13,10 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './movie-booking.component.html',
   //styleUrl: './movie-booking.component.css'
 })
-export class MovieBookingComponent implements OnInit {
+export class MovieBookingComponent implements OnInit, OnChanges {
   @Input() movie: any;
+  @Input() selectedDate: string = '';
+  @Input() selectedTime: string = '';
   @Output() closeBooking = new EventEmitter<void>();
   @Output() dateChange = new EventEmitter<string>();
   @Output() timeChange = new EventEmitter<string>();
@@ -36,14 +38,17 @@ export class MovieBookingComponent implements OnInit {
   ];
 
   theaters: { label: string; value: string; }[] = [];
-  _selectedTheater: any; // Use a private property to trigger setter
+  _selectedTheater: string = ''; // Use a private property to trigger setter
   
-  @Input() set selectedTheater(value: any) {
+  @Input()
+  set selectedTheater(value: string) {
     this._selectedTheater = value;
-    this.theaterChange.emit(value);
+    if (value) {
+      this.theaterChange.emit(value);
+    }
   }
 
-  get selectedTheater(): any {
+  get selectedTheater(): string {
     return this._selectedTheater;
   }
 
@@ -70,14 +75,33 @@ export class MovieBookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTheaters();
-    // Emit initial selected date and time
-    const initialDate = this.dates.find(d => d.selected);
-    if (initialDate) {
-      this.dateChange.emit(initialDate.fullDate);
+    // Set initial selected date and time if provided
+    if (this.selectedDate) {
+      const date = this.dates.find(d => d.fullDate === this.selectedDate);
+      if (date) {
+        this.selectDate(date);
+      }
     }
-    const initialTime = this.showtimes.find(t => t.selected);
-    if (initialTime) {
-      this.timeChange.emit(initialTime.label);
+    if (this.selectedTime) {
+      const time = this.showtimes.find(t => t.label === this.selectedTime);
+      if (time) {
+        this.selectShowtime(time);
+      }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedDate'] && changes['selectedDate'].currentValue) {
+      const date = this.dates.find(d => d.fullDate === changes['selectedDate'].currentValue);
+      if (date) {
+        this.selectDate(date);
+      }
+    }
+    if (changes['selectedTime'] && changes['selectedTime'].currentValue) {
+      const time = this.showtimes.find(t => t.label === changes['selectedTime'].currentValue);
+      if (time) {
+        this.selectShowtime(time);
+      }
     }
   }
 

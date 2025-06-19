@@ -53,6 +53,8 @@ export class HomeComponent implements OnInit {
   movieFilters: string[] = ['All', 'Action', 'Comedy', 'Drama', 'Horror'];
   selectedFilter: string = 'All';
 
+  stepData: { date: string; time: string; theater: string; seats: any[]; phoneNumber: string } = { date: '', time: '', theater: '', seats: [], phoneNumber: '' };
+
   constructor(private movieService: MovieService, private apiService: ApiService) {}
 
   ngOnInit() {
@@ -61,6 +63,15 @@ export class HomeComponent implements OnInit {
     this.offers = this.movieService.getOffers();
     this.reviews = this.movieService.getReviews();
     this.initSeats();
+    
+    // Initialize stepData with default values
+    this.stepData = {
+      date: this.selectedDate,
+      time: this.selectedTime,
+      theater: this.selectedTheater,
+      seats: [],
+      phoneNumber: ''
+    };
   }
 
   getNowShowing() {
@@ -96,6 +107,14 @@ export class HomeComponent implements OnInit {
     this.heroMovie = { ...movie, image: movie.posterUrl }; // Use posterUrl as the image for booking
     this.showBooking = true;
     this.currentStep = 1;
+    // Initialize stepData with default values
+    this.stepData = {
+      date: '',
+      time: '',
+      theater: '',
+      seats: [],
+      phoneNumber: ''
+    };
   }
 
   onCloseBooking() {
@@ -103,11 +122,35 @@ export class HomeComponent implements OnInit {
   }
 
   onStepChange(step: number) {
+    // Save current step data before changing steps
+    if (this.currentStep === 1) {
+      this.stepData.date = this.selectedDate;
+      this.stepData.time = this.selectedTime;
+      this.stepData.theater = this.selectedTheater;
+    } else if (this.currentStep === 2) {
+      this.stepData.seats = [...this.selectedSeats];
+    } else if (this.currentStep === 3) {
+      this.stepData.phoneNumber = this.phoneNumber;
+    }
+
+    // Update current step
     this.currentStep = step;
+
+    // Update component variables with stored data when moving to a step
+    if (step === 1) {
+      this.selectedDate = this.stepData.date || this.selectedDate;
+      this.selectedTime = this.stepData.time || this.selectedTime;
+      this.selectedTheater = this.stepData.theater || this.selectedTheater;
+    } else if (step === 2) {
+      this.selectedSeats = this.stepData.seats?.length ? [...this.stepData.seats] : this.selectedSeats;
+    } else if (step === 3) {
+      this.phoneNumber = this.stepData.phoneNumber || this.phoneNumber;
+    }
   }
 
   onSeatsSelected(selectedSeats: any[]) {
-    this.selectedSeats = selectedSeats;
+    this.selectedSeats = [...selectedSeats];
+    this.stepData.seats = [...selectedSeats];
   }
 
   onBookingDetails(date: string, time: string, theater: string) {
@@ -117,11 +160,16 @@ export class HomeComponent implements OnInit {
     this.selectedDate = formattedDate;
     this.selectedTime = time;
     this.selectedTheater = theater;
+    
+    // Update stepData as well
+    this.stepData.date = formattedDate;
+    this.stepData.time = time;
+    this.stepData.theater = theater;
   }
 
   validatePhoneNumber(): boolean {
     const phoneRegex = /^[0-9]{10}$/;
-    if (!this.phoneNumber || !phoneRegex.test(this.phoneNumber)) {
+    if (!this.stepData.phoneNumber || !phoneRegex.test(this.stepData.phoneNumber)) {
       alert('Please enter a valid 10-digit phone number.');
       return false;
     }
@@ -134,22 +182,22 @@ export class HomeComponent implements OnInit {
     }
 
     const bookingDetails = {
-      movie: this.heroMovie._id, // Assuming heroMovie has an _id property
-      date: this.selectedDate, // Ensure date is in a format suitable for backend (e.g., YYYY-MM-DD)
-      time: this.selectedTime,
-      theater: this.selectedTheater,
-      seats: this.selectedSeats.map(seat => seat.id),
-      phoneNumber: this.phoneNumber,
-      totalPrice: this.calculateTotalPrice() // You need to implement this method
+      movie: this.heroMovie._id,
+      date: this.stepData.date,
+      time: this.stepData.time,
+      theater: this.stepData.theater,
+      seats: this.stepData.seats.map(seat => seat.id),
+      phoneNumber: this.stepData.phoneNumber,
+      totalPrice: this.calculateTotalPrice()
     };
 
     this.apiService.bookTicket(bookingDetails).subscribe(
       (response: any) => {
         alert('Ticket booked successfully!');
         console.log('Booking successful:', response);
-        this.showBooking = false; // Close booking view or navigate to confirmation
-        this.currentStep = 1; // Reset stepper
-        this.resetBookingForm(); // Implement a method to reset form fields
+        this.showBooking = false;
+        this.currentStep = 1;
+        this.resetBookingForm();
       },
       (error: any) => {
         console.error('Error booking ticket:', error);
@@ -174,7 +222,16 @@ export class HomeComponent implements OnInit {
   resetBookingForm() {
     this.selectedSeats = [];
     this.phoneNumber = '';
-    // Reset other form fields as necessary
+    this.selectedDate = 'June 6, 2025';
+    this.selectedTime = '4:00 PM';
+    this.selectedTheater = 'CineFlex IMAX - Downtown';
+    this.stepData = {
+      date: this.selectedDate,
+      time: this.selectedTime,
+      theater: this.selectedTheater,
+      seats: [],
+      phoneNumber: ''
+    };
   }
 
   filterMovies(filter: string) {

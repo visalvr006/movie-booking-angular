@@ -103,9 +103,12 @@
             <ng-template #content let-activateCallback="activateCallback">
               <h3 class="booking-title">Select Date & Time</h3>
               <app-movie-booking
-                (dateChange)="selectedDate = $event"
-                (timeChange)="selectedTime = $event"
-                (theaterChange)="selectedTheater = $event"
+                [selectedDate]="stepData.date"
+                [selectedTime]="stepData.time"
+                [selectedTheater]="stepData.theater"
+                (dateChange)="selectedDate = $event; stepData.date = $event"
+                (timeChange)="selectedTime = $event; stepData.time = $event"
+                (theaterChange)="selectedTheater = $event; stepData.theater = $event"
                 (nextStep)="onStepChange(currentStep + 1)"
               ></app-movie-booking>
               <div class="flex pt-6 justify-content-end">
@@ -119,7 +122,8 @@
               <h3 class="booking-title">Select Your Seats</h3>
               <app-seat-selection
                 [seats]="seats"
-                (seatChange)="onSeatsSelected($event)"
+                [selectedSeats]="stepData.seats"
+                (seatChange)="onSeatsSelected($event); stepData.seats = $event"
                 [movieId]="heroMovie._id"
                 [date]="selectedDate"
                 [time]="selectedTime"
@@ -136,7 +140,7 @@
               <h3 class="booking-title">Enter Your Phone Number</h3>
               <div class="phone-number-container">
                 <label for="phoneNumber">Phone Number</label>
-                <input id="phoneNumber" type="tel" pInputText [(ngModel)]="phoneNumber" placeholder="Enter Phone Number" />
+                <input id="phoneNumber" type="tel" pInputText [(ngModel)]="stepData.phoneNumber" placeholder="Enter Phone Number" />
               </div>
               <div class="flex pt-6 justify-content-between">
                 <button class="outlined-red-btn-secondary" (click)="activateCallback(2); onStepChange(2)">Previous</button>
@@ -149,10 +153,10 @@
               <h3 class="booking-title">Booking Summary & Payment</h3>
               <app-booking-summary
                 [movie]="heroMovie"
-                [date]="selectedDate"
-                [time]="selectedTime"
-                [theater]="selectedTheater"
-                [selectedSeats]="selectedSeats"
+                [date]="stepData.date"
+                [time]="stepData.time"
+                [theater]="stepData.theater"
+                [selectedSeats]="stepData.seats"
                 (proceed)="onProceedToPayment()"
               ></app-booking-summary>
               <div class="flex pt-6 justify-content-start">

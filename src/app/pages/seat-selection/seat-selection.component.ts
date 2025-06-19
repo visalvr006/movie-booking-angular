@@ -15,9 +15,8 @@ export class SeatSelectionComponent implements OnInit, OnChanges {
   @Input() date: string = '';
   @Input() time: string = '';
   @Input() theater: string = '';
+  @Input() selectedSeats: any[] = [];
   @Output() seatChange = new EventEmitter<any[]>();
-
-  selectedSeats: any[] = [];
 
   constructor(private apiService: ApiService) { }
 
@@ -29,18 +28,43 @@ export class SeatSelectionComponent implements OnInit, OnChanges {
     if (changes['movieId'] || changes['date'] || changes['time'] || changes['theater']) {
       this.fetchBookedSeats();
     }
+    if (changes['selectedSeats'] && changes['selectedSeats'].currentValue) {
+      // Update the state of seats based on selectedSeats
+      const selectedSeats = changes['selectedSeats'].currentValue;
+      this.seats.forEach(row => {
+        row.forEach(seat => {
+          if (selectedSeats.some((s: { id: string }) => s.id === seat.id)) {
+            seat.state = 'selected';
+          }
+        });
+      });
+    }
   }
 
   fetchBookedSeats() {
     // Ensure all required parameters are available before making the API call
     if (!this.movieId || !this.date || !this.time || !this.theater) {
-      console.warn('Missing parameters for fetching booked seats.', { movieId: this.movieId, date: this.date, time: this.time, theater: this.theater });
+      console.warn('Missing parameters for fetching booked seats.', { 
+        movieId: this.movieId, 
+        date: this.date, 
+        time: this.time, 
+        theater: this.theater 
+      });
       return;
     }
 
-    this.apiService.getBookedSeats(this.movieId, this.date, this.time, this.theater).subscribe(
-      (data: any[]) => {
-        // Re-initialize seats to all available before marking booked ones
+    console.log('Fetching booked seats with params:', {
+      movieId: this.movieId,
+      date: this.date,
+      time: this.time,
+      theater: this.theater
+    });
+
+    this.apiService.getBookedSeats(this.movieId, this.date, this.time, this.theater).subscribe({
+      next: (data: any[]) => {
+        console.log('Received booked seats data:', data);
+        
+        // Initialize seats grid
         const rows = 6;
         const cols = 14;
         this.seats = Array.from({ length: rows }, (_, rowIdx) =>
@@ -50,28 +74,62 @@ export class SeatSelectionComponent implements OnInit, OnChanges {
           }))
         );
 
-        data.forEach(booking => {
-          booking.seats.forEach((bookedSeatId: string) => {
-            const rowLabel = bookedSeatId.charAt(0);
-            const colNum = parseInt(bookedSeatId.substring(1), 10);
+        // Mark booked seats if data is valid
+        if (Array.isArray(data)) {
+          data.forEach(booking => {
+            if (booking && Array.isArray(booking.seats)) {
+              booking.seats.forEach((bookedSeatId: string) => {
+                try {
+                  const rowLabel = bookedSeatId.charAt(0);
+                  const colNum = parseInt(bookedSeatId.substring(1), 10);
 
-            const rowIndex = rowLabel.charCodeAt(0) - 'A'.charCodeAt(0);
-            const colIndex = colNum - 1;
+                  const rowIndex = rowLabel.charCodeAt(0) - 'A'.charCodeAt(0);
+                  const colIndex = colNum - 1;
 
-            if (this.seats[rowIndex] && this.seats[rowIndex][colIndex]) {
-              this.seats[rowIndex][colIndex].state = 'booked';
+                  if (this.seats[rowIndex] && this.seats[rowIndex][colIndex]) {
+                    this.seats[rowIndex][colIndex].state = 'booked';
+                  }
+                } catch (error) {
+                  console.error('Error processing seat:', bookedSeatId, error);
+                }
+              });
             }
           });
-        });
+        } else {
+          console.warn('Invalid data format received:', data);
+        }
 
-        // After updating booked seats, ensure selected seats are also handled
-        this.selectedSeats = this.seats.flatMap(row => row.filter(seat => seat.state === 'selected'));
+        // Restore selected seats
+        if (this.selectedSeats && this.selectedSeats.length > 0) {
+          this.selectedSeats.forEach(selectedSeat => {
+            try {
+              const rowLabel = selectedSeat.id.charAt(0);
+              const colNum = parseInt(selectedSeat.id.substring(1), 10);
+              const rowIndex = rowLabel.charCodeAt(0) - 'A'.charCodeAt(0);
+              const colIndex = colNum - 1;
 
+              if (this.seats[rowIndex] && this.seats[rowIndex][colIndex] && this.seats[rowIndex][colIndex].state !== 'booked') {
+                this.seats[rowIndex][colIndex].state = 'selected';
+              }
+            } catch (error) {
+              console.error('Error processing selected seat:', selectedSeat, error);
+            }
+          });
+        }
       },
-      error => {
+      error: (error) => {
         console.error('Error fetching booked seats:', error);
+        // Initialize seats as available in case of error
+        const rows = 6;
+        const cols = 14;
+        this.seats = Array.from({ length: rows }, (_, rowIdx) =>
+          Array.from({ length: cols }, (_, colIdx) => ({
+            id: `${String.fromCharCode(65 + rowIdx)}${colIdx + 1}`,
+            state: 'available'
+          }))
+        );
       }
-    );
+    });
   }
 
   onSeatClick(seat: any) {
@@ -82,7 +140,7 @@ export class SeatSelectionComponent implements OnInit, OnChanges {
     } else {
       seat.originalState = seat.state;
       seat.state = 'selected';
-      this.selectedSeats.push(seat);
+      this.selectedSeats = [...this.selectedSeats, seat];
     }
     this.seatChange.emit(this.selectedSeats);
   }
