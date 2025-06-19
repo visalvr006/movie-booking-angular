@@ -30,18 +30,17 @@ export class ApiService {
   }
 
   getBookedSeats(movieId?: string, date?: string, time?: string, theater?: string): Observable<any> {
-    let params = new URLSearchParams();
-    if (movieId) params.append('movieId', movieId);
+    let params: any = {};
+    if (movieId) params.movieId = movieId;
     if (date) {
-      // Ensure date is in YYYY-MM-DD format
       const dateObj = new Date(date);
       const formattedDate = dateObj.toISOString().split('T')[0];
-      params.append('date', formattedDate);
+      params.date = formattedDate;
     }
-    if (time) params.append('time', time);
-    if (theater) params.append('theater', theater);
+    if (time) params.time = time;
+    if (theater) params.theater = theater;
 
-    return this.http.get(`${this.apiUrl}/seats`, { params: params as any });
+    return this.http.get(`${this.apiUrl}/seats`, { params });
   }
 
   bookTicket(bookingDetails: any): Observable<any> {
