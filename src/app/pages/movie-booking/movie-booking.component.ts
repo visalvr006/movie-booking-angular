@@ -75,18 +75,15 @@ export class MovieBookingComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getTheaters();
-    // Set initial selected date and time if provided
-    if (this.selectedDate) {
-      const date = this.dates.find(d => d.fullDate === this.selectedDate);
-      if (date) {
-        this.selectDate(date);
-      }
+
+    // Set initial selected date and time if provided, otherwise use defaults
+    const defaultDate = this.dates.find(d => d.selected);
+    if (defaultDate) {
+      this.selectDate(defaultDate);
     }
-    if (this.selectedTime) {
-      const time = this.showtimes.find(t => t.label === this.selectedTime);
-      if (time) {
-        this.selectShowtime(time);
-      }
+    const defaultTime = this.showtimes.find(t => t.selected);
+    if (defaultTime) {
+      this.selectShowtime(defaultTime);
     }
   }
 
